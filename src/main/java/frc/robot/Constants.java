@@ -34,4 +34,52 @@ public final class Constants {
     /** Replaying from a log file. */
     REPLAY
   }
+  public static final class DriveTrainConstants{
+    public static final int Pigeon = 10;
+
+    public static final int FRMotor1 = 1;
+    public static final int FRMotor2 = 2;
+    public static final int FRCanCoder = 3;
+
+    public static final int FLMotor1 = 4;
+    public static final int FLMotor2 = 5;
+    public static final int FLCanCoder = 6;
+
+    public static final int BRMotor1 = 11;
+    public static final int BRMotor2 = 12;
+    public static final int BRCanCoder = 13;
+
+    public static final int BLMotor1 = 14;
+    public static final int BLMotor2 = 15;
+    public static final int BLCanCoder = 16;
+
+  }
+
+  public static final class ArmConstants{
+    public static final int kArmMotor = 20;
+    public static final int kLockMotor = 21;
+
+    public static final double kArmSpeedUp = 0.5;
+    public static final double kArmSpeedDown = -0.5;
+
+    public static final int kArmMotorCurrentLimit = 40;
+    public static final int kLockMotorCurrentLimit = 40;
+
+    public static final int kArmPIDControllerP = 0;
+    public static final int kArmPIDControllerI = 0;
+    public static final int kArmPIDControllerD = 0;
+    public static final int kArmPIDControllerFF = 0;
+    public static final int kArmPIDControllerIZone = 0;
+    public static final int kArmPIDControllerOutputRange = 5;
+    public static final int kArmPIDControllerOutputMin = 5;
+    public static final int kArmPIDControllerOutputMax = 5;
+
+    public static final int kArmPositionLow = 15;
+    public static final int kArmPositionMid = 45;
+    public static final int kArmPositionHigh = 110;
+    
+  }
+  public static class OperatorConstants {
+    public static final int kDriverControllerPort = 0;
+  }
 }
