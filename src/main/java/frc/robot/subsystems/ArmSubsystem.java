@@ -33,10 +33,15 @@ import java.util.function.DoubleSupplier;
 
 
 public class ArmSubsystem extends SubsystemBase{
-    private SparkClosedLoopController m_armPIDController;
-    SparkMaxConfig config = new SparkMaxConfig();
+    private SparkMaxConfig armConfig;
+
     private final SparkMax m_armMotor = new SparkMax(ArmConstants.kArmMotor, MotorType.kBrushless);
     private final SparkMax m_lockMotor = new SparkMax(ArmConstants.kLockMotor, MotorType.kBrushless);
+
+    private SparkClosedLoopController m_armPIDController;
+    private SparkClosedLoopController m_lockMotorPID;
+
+    private RelativeEncoder m_armEncoder;
     private int positionCheck = 0;
 
 
@@ -48,20 +53,24 @@ public class ArmSubsystem extends SubsystemBase{
 
         m_armPIDController.setReference (ArmConstants.kArmPositionLow, SparkMax.ControlType.kPosition);
 
-        config
+        armConfig = new SparkMaxConfig();
+
+        armConfig
         .inverted(true)
         .idleMode(IdleMode.kBrake)
         .smartCurrentLimit(ArmConstants.kArmMotorCurrentLimit);
-        config.encoder
+        armConfig.encoder
         .positionConversionFactor(ArmConstants.kArmEncoderConversionFactor);
-        config.closedLoop
+        armConfig.closedLoop
         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
         .pid(ArmConstants.kArmPIDControllerP, ArmConstants.kArmPIDControllerI, ArmConstants.kArmPIDControllerD)
         .outputRange(ArmConstants.kArmPIDControllerOutputMin, ArmConstants.kArmPIDControllerOutputMax);
 
-        m_armMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        m_armMotor.configure(armConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         m_armPIDController = m_armMotor.getClosedLoopController();
+        m_lockMotorPID = m_lockMotor.getClosedLoopController();
 
+        m_armEncoder = m_armMotor.getEncoder();
 
     }
 
@@ -70,24 +79,32 @@ public class ArmSubsystem extends SubsystemBase{
      */
 
     public void setArmPositionLow(){
-        m_armPIDController.setReference(ArmConstants.kArmPositionLow, ControlType.kPosition);
+        m_armPIDController.setReference(ArmConstants.kArmPositionLow, ControlType.kPosition, ClosedLoopSlot.kSlot1);
 
         positionCheck = ArmConstants.kArmPositionLow;
     }
 
     public void setArmPositionMid(){
-        m_armPIDController.setReference(ArmConstants.kArmPositionMid, ControlType.kPosition);
+        m_armPIDController.setReference(ArmConstants.kArmPositionMid, ControlType.kPosition, ClosedLoopSlot.kSlot1);
     }
 
     public void setArmPositionHigh(){
-        m_armPIDController.setReference(ArmConstants.kArmPositionHigh, ControlType.kPosition);
+        m_armPIDController.setReference(ArmConstants.kArmPositionHigh, ControlType.kPosition, ClosedLoopSlot.kSlot1);
     }
 
     //returns the positition of the arm
     public double getPosition(){
-        double position = m_armMotor.getEncoder().getPosition();
+        double position = m_armEncoder.getPosition();
         return position;
     }
+
+    /*
+     * Lock Motor Method (will probably need to make more
+     * complex later)
+     */
+     public void lockMotor(){
+        m_lockMotorPID.setReference(ArmConstants.kLockMotorSpeed, ControlType.kVelocity);
+     }
 
     //checks to see if the arm in close to the position that it should be at
     public boolean checkArmPosition(){
