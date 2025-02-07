@@ -81,6 +81,35 @@ public final class Constants {
     public static final int kArmPositionHigh = 110;
     
   }
+  
+  public static final class AlgaeShooterConstants {
+
+    public static final int AlgaeRevMotor = 31;
+    public static final int AlgaeKickMotor = 32;
+
+    public static final double AlgaeSpeedForward = 0.5;
+    public static final double AlgaeSpeedBackward = -0.5;
+
+    public static final int AlgaeRevMotorCurrentLimit = 40;
+    public static final int AlgaeKickMotorCurrentLimit = 40;
+
+    public static final int AlgaePIDControllerP = 0;
+    public static final int AlgaePIDControllerI = 0;
+    public static final int AlgaePIDControllerD = 0;
+    public static final int AlgaePIDControllerFF = 0;
+    public static final int AlgaePIDControllerIZone = 0;
+    public static final int AlgaePIDControllerOutputRange = 5;
+    public static final int AlgaePIDControllerOutputMin = 5;
+    public static final int AlgaePIDControllerOutputMax = 5;
+
+    public static final int AlgaeEncoderConversionFactor = 1000;
+
+
+
+  }
+
+
+
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
