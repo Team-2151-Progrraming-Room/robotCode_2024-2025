@@ -27,6 +27,7 @@ import com.revrobotics.spark.SparkBase.*;
 import frc.robot.Robot;
 import frc.robot.Constants.AlgaeShooterConstants;
 //import frc.robot.util - keep if needed for future use;
+import frc.robot.Constants.ArmConstants;
 
 public class AlgaeShooterSubsystem extends SubsystemBase {
     
@@ -58,6 +59,16 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
         m_AlgaeRevMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); //No this is for safety.
         m_AlgaePIDController = m_AlgaeRevMotor.getClosedLoopController();
 
+        config
+        .inverted(true)
+        .idleMode(IdleMode.kBrake)
+        .smartCurrentLimit(ArmConstants.kArmMotorCurrentLimit);
+        config.encoder
+        .positionConversionFactor(ArmConstants.kArmEncoderConversionFactor);
+        config.closedLoop
+        .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+        .pid(ArmConstants.kArmPIDControllerP, ArmConstants.kArmPIDControllerI, ArmConstants.kArmPIDControllerD)
+        .outputRange(ArmConstants.kArmPIDControllerOutputMin, ArmConstants.kArmPIDControllerOutputMax);
 
         //For Rev2 Motor
 
