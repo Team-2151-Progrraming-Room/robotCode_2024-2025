@@ -96,6 +96,7 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
         m_AlgaeRevPIDController.setReference(AlgaeShooterConstants.AlgaeRevVelocity, SparkMax.ControlType.kVelocity); 
         m_AlgaeRev2PIDController.setReference(AlgaeShooterConstants.AlgaeRev2Velocity, SparkMax.ControlType.kVelocity);
     }
+
     public void  AlgaeMotorsOff(){
         m_AlgaeKickMotor.stopMotor();
         m_AlgaeRevMotor.stopMotor();
@@ -121,7 +122,7 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
             () -> {AlgaeMotorsOff();}
         );
     }
-    
+
 }
 
 
