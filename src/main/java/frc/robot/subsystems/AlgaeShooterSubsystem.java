@@ -55,32 +55,24 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
         // For RevMotor
 
         m_AlgaePIDController.setReference (AlgaeShooterConstants.AlgaeRevVelocity, SparkMax.ControlType.kVelocity);
-
-        m_AlgaeRevMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        m_AlgaeRevMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); //No this is for safety.
         m_AlgaePIDController = m_AlgaeRevMotor.getClosedLoopController();
 
 
         //For Rev2 Motor
 
         m_AlgaePIDController.setReference (AlgaeShooterConstants.AlgaeRev2Velocity, SparkMax.ControlType.kVelocity);
-
-        
-        m_AlgaeRev2Motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        m_AlgaeRev2Motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);        // this is for safety too
         m_AlgaePIDController = m_AlgaeRev2Motor.getClosedLoopController();
 
 
-        // For Kick Motor
+        //For Kick Motor
 
         m_AlgaePIDController.setReference (AlgaeShooterConstants.AlgaeKickVelocity,ControlType.kVelocity);
-
-        
-        m_AlgaeKickMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        m_AlgaeKickMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); // this one too.
         m_AlgaePIDController = m_AlgaeKickMotor.getClosedLoopController();
         
         
-            
-       
-
     }
 
 
@@ -93,7 +85,7 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
  
     }
     public void AlgaeRev2MotorOn(){
-        m_AlgaeRev2Motor.set(AlgaeRev2Motor.kVelocity);
+        m_AlgaeRev2Motor.set  (AlgaeRev2Motor.kVelocity);
     }
     public void  AlgaeMotorOff(){
         m_AlgaeKickMotor.stopMotor();
