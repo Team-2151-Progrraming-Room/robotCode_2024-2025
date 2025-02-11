@@ -35,6 +35,7 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
     private SparkClosedLoopController m_AlgaeRevPIDController;
     private SparkClosedLoopController m_AlgaeRev2PIDController;
     private SparkClosedLoopController m_AlgaeKickPIDController;
+
         SparkMaxConfig config = new SparkMaxConfig();
     private final SparkMax m_AlgaeRevMotor = new SparkMax(AlgaeShooterConstants.AlgaeRevMotor, MotorType.kBrushless);
     private final SparkMax m_AlgaeRev2Motor = new SparkMax(AlgaeShooterConstants.AlgaeRev2Motor, MotorType.kBrushless);
@@ -55,55 +56,69 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
         
 
 
-        // For RevMotor
-        //m_AlgaeRevPIDController.setReference (AlgaeShooterConstants.AlgaeRev2Velocity, SparkMax.ControlType.kVelocity);
-        m_AlgaeRevMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); //No this is for safety.
-        m_AlgaeRevPIDController = m_AlgaeRevMotor.getClosedLoopController();
+            // For RevMotor
+            //m_AlgaeRevPIDController.setReference (AlgaeShooterConstants.AlgaeRev2Velocity, SparkMax.ControlType.kVelocity);
+            m_AlgaeRevMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); //No this is for safety.
+            m_AlgaeRevPIDController = m_AlgaeRevMotor.getClosedLoopController();
 
-        config
-        .inverted(true)
-        .idleMode(IdleMode.kBrake)
-        .smartCurrentLimit(ArmConstants.kArmMotorCurrentLimit);
-        config.encoder
-        .positionConversionFactor(ArmConstants.kArmEncoderConversionFactor);
-        config.closedLoop
-        .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-        .pid(ArmConstants.kArmPIDControllerP, ArmConstants.kArmPIDControllerI, ArmConstants.kArmPIDControllerD)
-        .outputRange(ArmConstants.kArmPIDControllerOutputMin, ArmConstants.kArmPIDControllerOutputMax);
+            config
+            .inverted(true)
+            .idleMode(IdleMode.kBrake)
+            .smartCurrentLimit(ArmConstants.kArmMotorCurrentLimit);
+            config.encoder
+            .positionConversionFactor(ArmConstants.kArmEncoderConversionFactor);
+            config.closedLoop
+            .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+            .pid(ArmConstants.kArmPIDControllerP, ArmConstants.kArmPIDControllerI, ArmConstants.kArmPIDControllerD)
+            .outputRange(ArmConstants.kArmPIDControllerOutputMin, ArmConstants.kArmPIDControllerOutputMax);
 
-        //For Rev2 Motor
+            //For Rev2 Motor
 
-       // m_AlgaeRev2PIDController.setReference (AlgaeShooterConstants.AlgaeRev2Velocity, SparkMax.ControlType.kVelocity);
-        m_AlgaeRev2Motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);        // this is for safety too
-        m_AlgaeRev2PIDController = m_AlgaeRev2Motor.getClosedLoopController();
+        // m_AlgaeRev2PIDController.setReference (AlgaeShooterConstants.AlgaeRev2Velocity, SparkMax.ControlType.kVelocity);
+            m_AlgaeRev2Motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);        // this is for safety too
+            m_AlgaeRev2PIDController = m_AlgaeRev2Motor.getClosedLoopController();
 
 
-        //For Kick Motor
+            //For Kick Motor
 
-       // m_AlgaeKickPIDController.setReference (AlgaeShooterConstants.AlgaeKickVelocity,ControlType.kVelocity);
-        m_AlgaeKickMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); // this one too.
-        m_AlgaeKickPIDController = m_AlgaeKickMotor.getClosedLoopController();
-        
-        
+        // m_AlgaeKickPIDController.setReference (AlgaeShooterConstants.AlgaeKickVelocity,ControlType.kVelocity);
+            m_AlgaeKickMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); // this one too.
+            m_AlgaeKickPIDController = m_AlgaeKickMotor.getClosedLoopController();
+            
+            
     }
 
 
 
     public void AlgaeKickMotorOn(){
-        m_AlgaeKickPIDController.setReference(AlgaeShooterConstants.AlgaeKickVelocity, SparkMax.ControlType.kVelocity);
+            m_AlgaeKickPIDController.setReference(AlgaeShooterConstants.AlgaeKickVelocity, SparkMax.ControlType.kVelocity);
     }
+
     public void AlgaeRevMotorsOn(){
-        m_AlgaeRevPIDController.setReference(AlgaeShooterConstants.AlgaeRevVelocity, SparkMax.ControlType.kVelocity); 
-        m_AlgaeRev2PIDController.setReference(AlgaeShooterConstants.AlgaeRev2Velocity, SparkMax.ControlType.kVelocity);
+            m_AlgaeRevPIDController.setReference(AlgaeShooterConstants.AlgaeRevVelocity, SparkMax.ControlType.kVelocity); 
+            m_AlgaeRev2PIDController.setReference(AlgaeShooterConstants.AlgaeRev2Velocity, SparkMax.ControlType.kVelocity);
     }
 
     public void  AlgaeMotorsOff(){
-        m_AlgaeKickMotor.stopMotor();
-        m_AlgaeRevMotor.stopMotor();
-        m_AlgaeRev2Motor.stopMotor();
+            m_AlgaeKickMotor.stopMotor();
+            m_AlgaeRevMotor.stopMotor();
+            m_AlgaeRev2Motor.stopMotor();
+    }
+    
+/// For getting the Velocities
+
+    public double getRevVelocity(){
+        double velocity = m_AlgaeRevMotor.getEncoder().getVelocity();
+        return velocity;
     }
 
-// Command
+    public double getRev2Velocity(){
+        double velocity = m_AlgaeRev2Motor.getEncoder().getVelocity();
+        return velocity;
+
+    }
+
+// Commands
 
     public Command AlgaeKickMotorOnCommand(){
         return runOnce(
@@ -122,6 +137,19 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
             () -> {AlgaeMotorsOff();}
         );
     }
+
+    public Command getAlgaeRevVelocityCommand(){
+        return runOnce(
+            () -> {getRevVelocity();}
+        );
+    }
+
+    public Command GetAlgaeRev2VelocityCommand(){
+        return runOnce(
+            () -> {getRev2Velocity();}
+        );
+    }
+
 
 }
 
