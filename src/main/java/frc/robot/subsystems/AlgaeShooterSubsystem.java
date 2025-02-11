@@ -26,7 +26,7 @@ import com.revrobotics.spark.SparkBase.*;
 
 import frc.robot.Robot;
 import frc.robot.Constants.AlgaeShooterConstants;
-//import frc.robot.util;
+//import frc.robot.util - keep if needed for future use;
 
 public class AlgaeShooterSubsystem extends SubsystemBase {
     
