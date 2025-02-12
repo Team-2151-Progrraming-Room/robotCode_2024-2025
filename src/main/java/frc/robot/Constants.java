@@ -35,7 +35,7 @@ public final class Constants {
     REPLAY
   }
 
-  public static final class DriveTrainConstants{
+  public static final class DriveTrainConstants {
     public static final int Pigeon = 10;
 
     public static final int FRMotor1 = 1;
@@ -53,9 +53,8 @@ public final class Constants {
     public static final int BLMotor1 = 14;
     public static final int BLMotor2 = 15;
     public static final int BLCanCoder = 16;
-
   }
-  
+
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
