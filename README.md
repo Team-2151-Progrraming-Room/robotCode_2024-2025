@@ -1,7 +1,41 @@
 List of subsystem we will have:
--DriveTrainSubsystem: Swerve modules and their sensors
--ArmSubsystem: Movement of the arm and lock mechanism for deep climb
--CoralSubsystem: Would handle coral intake and drop off
--AlgaeShooterSubsystem: Algae intake, processor drop off, and shooting into the barge
--LEDSubsystem: Lights to help indicate different things on the robot + help us stay in the game
--VisionSubsystem: Help us to navigate the field
+- DriveTrainSubsystem
+  - Swerve modules (4) each including
+    - Drive motor
+    - Steer motor
+    - CANcoder for steering angle
+  - Pigeon IMU
+  - Connected to roroRIO using CANivore so all drivetrain motors and sensors are on a high speed CAN FD bus
+- ArmSubsystem
+  - Controls movement of the arm
+    - Algae manipulation
+    - Climbing
+  - Motors
+    - Pair of motors driving arm position and holding position as needed
+  - Sensors
+    - Angular position of arm
+      - How will we zero this encoder so we know the starting position?
+    - Cage engaged for climbing sensor?
+- CoralSubsystem
+  - Would handle coral intake and drop off
+  - Motors
+    - Single motor
+  - Sensors
+    - Detect coral loaded
+- AlgaeShooterSubsystem
+  - Algae intake, processor drop off, and shooting into the barge
+  - Motors
+    - Two intake and shooting motors driving upper and lower rollers - independently controlled
+    - Single motor for algea retention and to feed into shooting rollers
+  - Sensors
+    - Algae loaded sensor
+- ClimbLockSubsystem
+  - Engages cage locks to secure arm to cage
+  - Motors
+    - Single DC motor with attached gearbox to rotate cage locks into locked position
+  - Sensors
+    - Encoder on lock motor to measure lock rotation from full open
+- LEDSubsystem
+  - Lights to help indicate different things on the robot + help us stay in the game
+- VisionSubsystem
+  - Help us to navigate the field
