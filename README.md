@@ -17,11 +17,11 @@ List of subsystem we will have:
       - How will we zero this encoder so we know the starting position?
     - Cage engaged for climbing sensor?
 - CoralSubsystem
-  - Would handle coral intake and drop off
+  - Would handle coral intake and drop off - since the coral is dropped in passively from the loading station we really just need the motor to score it
   - Motors
     - Single motor
   - Sensors
-    - Detect coral loaded
+    - Detect coral loaded?  Not even sure we need this as our coral loading is all passive from the loading station
 - AlgaeShooterSubsystem
   - Algae intake, processor drop off, and shooting into the barge
   - Motors
