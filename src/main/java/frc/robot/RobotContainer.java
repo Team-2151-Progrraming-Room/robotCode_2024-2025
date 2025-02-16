@@ -58,6 +58,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    System.out.println("Robot starting ----------------------------------------------");
     switch (Constants.currentMode) {
       case REAL:
         // Real robot, instantiate hardware IO implementations
@@ -155,6 +156,7 @@ public class RobotContainer {
                     drive)
                 .ignoringDisable(true));
 
+    System.out.println("Setting climbLockCommand ----------------------------------------------");
     controller.y().onTrue(m_climbLockCommand);      // TESTING ONLY!!
   }
 

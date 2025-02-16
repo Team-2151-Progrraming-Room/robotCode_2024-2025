@@ -39,8 +39,9 @@ public class ClimbLockSubsystem extends SubsystemBase {
   public ClimbLockSubsystem() {
 
     System.out.print("Initializing ClimbLockSubsystem...  ");
+    System.out.print("BRUSHLESS...  ");
 
-    m_climbLockMotor = new SparkMax(ClimbLockConstants.kClimbLockCanRioId, MotorType.kBrushed);
+    m_climbLockMotor = new SparkMax(ClimbLockConstants.kClimbLockCanRioId, MotorType.kBrushless);   // CHANGE WHEN GOING BRUSHED!!
 
     m_controllerConfig
       .smartCurrentLimit(ClimbLockConstants.kClimbLockCloseCurrentLimit)
