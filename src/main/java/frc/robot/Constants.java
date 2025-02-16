@@ -81,8 +81,8 @@ public final class Constants {
 
   }
   public static class CoralConstants {
-    public static final int kCoralMotor1 = 35
-    public static final int kCoralMotor2 = 36
+    public static final int kCoralMotor1 = 35;
+    public static final int kCoralMotor2 = 36;
    
     public static final double kCoralMotor1IntakeSpeed = 0.5;
     public static final double kCoralMotor2IntakeSpeed = -0.5;
