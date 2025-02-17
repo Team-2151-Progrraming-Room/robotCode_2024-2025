@@ -54,10 +54,12 @@ public final class Constants {
     public static final int BLCanCoder = 16;
 
   }
-
   public static final class ArmConstants{
     public static final int kArmMotor = 20;
     public static final int kLockMotor = 21;
+
+    public static final double kArmSpeedUp = 0.5;
+    public static final double kArmSpeedDown = -0.5;
 
     public static final int kArmMotorCurrentLimit = 40;
     public static final int kLockMotorCurrentLimit = 40;
@@ -71,25 +73,14 @@ public final class Constants {
     public static final int kArmPIDControllerOutputMin = 5;
     public static final int kArmPIDControllerOutputMax = 5;
 
-    public static final int kLockPIDControllerP = 0;
-    public static final int kLockPIDControllerI = 0;
-    public static final int kLockPIDControllerD = 0;
-    public static final int kLockPIDControllerFF = 0;
-    public static final int kLockPIDControllerIZone = 0;
-    public static final int kLockPIDControllerOutputRange = 5;
-    public static final int kLockPIDControllerOutputMin = 5;
-    public static final int kLockPIDControllerOutputMax = 5;
-
     public static final int kArmEncoderConversionFactor = 1000;
 
-    //position in angles
     public static final int kArmPositionLow = 15;
     public static final int kArmPositionMid = 45;
     public static final int kArmPositionHigh = 110;
 
-    public static final double kLockMotorSpeed = 5;//velocity
-    
   }
+  
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
