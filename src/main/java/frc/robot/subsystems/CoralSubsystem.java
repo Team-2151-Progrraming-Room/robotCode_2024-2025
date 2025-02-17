@@ -30,16 +30,19 @@ import frc.robot.util.*;
 
 import java.util.function.DoubleSupplier;
 
-private final SparkMax m_Motor1 = new SparkMax(CoralConstants.kCoralMotor1, MotorType.kBrushless);
-private final SparkMax m_Motor2 = new SparkMax(CoralConstants.kCoralMotor2, MotorType.kBrushless);
+
 
 public class CoralSubsystem extends SubsystemBase{
 
-    //motor1 pid
+    private final SparkMax m_Motor1 = new SparkMax(CoralConstants.kCoralMotor1, MotorType.kBrushless);
+    private final SparkMax m_Motor2 = new SparkMax(CoralConstants.kCoralMotor2, MotorType.kBrushless);
+    private SparkClosedLoopController m_Coral1PIDController;
+    private SparkClosedLoopController m_Coral2PIDController;
+   
+    //motor pid
     public CoralSubsystem(){
         m_CoralMotor1.stopMotor();
-
-        m_MotorPIDController.setReference (CoralConstants.kArmPositionLow, SparkMax.ControlType.kPosition);
+        m_CoralMotor2.stopMotor();
 
         config
         .inverted(true)
@@ -53,29 +56,31 @@ public class CoralSubsystem extends SubsystemBase{
         .outputRange(CoralConstants.kCoralPIDControllerOutputMin, CoralConstants.kCoralPIDControllerOutputMax);
 
         m_coralMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        m_coralPIDController = m_coralMotor.getClosedLoopController();
-
+        m_Coral1PIDController = m_CoralMotor1.getClosedLoopController();
+        m_Coral2PIDController = m_CoralMotor2.getClosedLoopController();
 
     }
 
-    //intake Motor1
-    public void intakeCoralMotor1(){
-        m_coralPIDController.setReference(CoralConstants.kCoralMotor1IntakeSpeed, ControlType.kPosition);
+    //encoders
+    public double getVelocity1(){
+        double position = m_CoralMotor1.getEncoder().getVelocity1();
+        return position;
+    }
+    public double getVelocity2(){
+        double position = m_CoralMotor2.getEncoder().getVelocity2();
+        return position;
     }
 
-    //intake Motor2
-    public void intakeCoralMotor2(){
-        m_coralPIDController.setReference(CoralConstants.kCoralMotor2IntakeSpeed, ControlType.kPosition);
+    //intake 
+    public void intakeCoralMotor(){
+        m_Coral1PIDController.setReference(CoralConstants.kCoralMotor1IntakeSpeed, ControlType.kPosition);
+        m_Coral2PIDController.setReference(CoralConstants.kCoralMotor2IntakeSpeed, ControlType.kPosition);
     }
 
-    //output Motor1
-    public void outputCoralMotor1(){
-        m_coralPIDController.setReference(CoralConstants.kCoralMotor1OutputSpeed, ControlType.kPosition);
-    }
-
-    //output Motor2
-    public void outputCoralMotor2(){
-        m_coralPIDController.setReference(CoralConstants.kCoralMotor2OutputSpeed, ControlType.kPosition);
+    //output 
+    public void outputCoralMotor(){
+        m_Coral1PIDController.setReference(CoralConstants.kCoralMotor1OutputSpeed, ControlType.kPosition);
+        m_Coral2PIDController.setReference(CoralConstants.kCoralMotor2OutputSpeed, ControlType.kPosition);
     }
    
     /*Command methods for intake and output */
@@ -83,7 +88,25 @@ public class CoralSubsystem extends SubsystemBase{
         return runOnce(
             () -> {intakeCoral();}
         );
-     }
+    }
 
+     public Command outputCoralCommand(){
+        return runOnce(
+            () -> {outputCoral();}
+        );
+    }
+    
+    //returns velocity value of motors
+    public Command getVelocity1Command(){
+        return runOnce(
+            () -> {getVelocity1();}
+        );
+    }
+    public Command getVelocity2Command(){
+        return runOnce(
+            () -> {getVelocity2();}
+        );
+    }
+
+    
 }
-
