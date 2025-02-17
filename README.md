@@ -1,0 +1,83 @@
+List of subsystem we will have:
+- DriveTrainSubsystem
+  - Swerve modules (4) each including
+    - Drive motor
+    - Steer motor
+    - CANcoder for steering angle
+  - Pigeon IMU
+  - Connected to roboRIO using CANivore so all drivetrain motors and sensors are on a high speed CAN FD bus
+- ArmSubsystem
+  - Controls movement of the arm
+    - Algae manipulation
+    - Climbing
+  - Motors
+    - Pair of motors driving arm position and holding position as needed
+    - Leader / follower?
+  - Sensors
+    - Angular position of arm
+      - Where will we measure this from?
+      - How will we zero this encoder so we know the starting position?
+    - Cage engaged for climbing sensor?  Meaning we've contacted the top side of the cage bottom - is visual enough?
+    - Are there specific positions we need to be able to reach and maintain?
+      - Floor pickup
+      - Processor scoring
+      - Low reef algae removal
+      - High reef algae removal
+      - Net shooting
+      - Others?
+    - How does this subsystem interact with other subsystems?
+      - Commands for example
+- CoralSubsystem
+  - Would handle coral intake and drop off - since the coral is dropped in passively from the loading station we really just need the motor to score it
+  - Motors
+    - Single motor - most likely
+    - Is PID functionality needed for this application?
+      - Why or why not?
+  - Sensors
+    - Detect coral loaded?  Not even sure we need this as our coral loading is all passive from the loading station
+  - How does this subsystem interact with other subsystems?
+    - Commands for example
+- AlgaeShooterSubsystem
+  - Algae floor pickup, reef removal, processor drop off, and shooting into the barge
+  - Motors
+    - Two intake / shooting motors driving upper and lower rollers
+      - Independently controlled?
+      - Why or why not?
+    - Single motor for algae retention and to feed into shooting rollers
+      - How will this interact with the intake / shooting motors?
+      - How will the code handle that?
+  - Sensors
+    - Algae loaded sensor?
+    - What happens if we don't get a sensor for this condition?
+  - How does this subsystem interact with other subsystems?
+    - Commands for example
+- ClimbLockSubsystem
+  - Engages cage locks to secure arm to cage
+  - Motors
+    - Single DC motor with attached gearbox to rotate cage locks into locked position
+  - Sensors
+    - Encoder on lock motor to measure lock rotation from full open
+  - Other considerations
+    - Stalls at lock position
+    - May need to reduce current limit from active closing current limit
+  - Other subsystem interactions
+    - Works as part of the climb sequence
+    - Requires some specific arm orientations to grab and engage with the cage
+      - Starting orientation
+        - We'll have to empirically figure out the angle
+      - Lock
+      - Climb
+        - Not a separate "subsystem but a combined effort
+          - Arm position
+          - Cage locking
+        - Effectively "lowering" the arm which will pull the robot up
+          - Can we define an arm limit for this to prevent potential robot damage?  Do we have to?
+          - Can we just "climb" by lowering the arm to it's lowest position?
+- LEDSubsystem
+  - Lights to help indicate different things on the robot + help us stay in the game
+  - What functionality is needed?
+  - What states do we want to indicate:
+    - List them here...
+    - What will the look like to the operator?
+- VisionSubsystem
+  - Help us to navigate the field
