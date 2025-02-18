@@ -83,6 +83,34 @@ public class AlgaeSubsystemCTRE extends SubsystemBase (){
 // Get velocites, put in later.
 
     //Commands
-    public Command 
+    
+    public Command RevMotorOFFCommand(){
+        return runOnce(
+            () -> {RevMotorsOFF();}
+        );
+    }
 
+    public Command KickMotorOFFCommand(){
+        return runOnce(
+            () -> {KickMotorOFF();}
+        );
+    }
+
+    public Command allMotorsOFFCommand(){
+        return runOnce(
+            () -> {allMotorsOFF();}
+        );
+    }
+
+    public Command RevMotorsSHOOTCommand(){
+        return runOnce(
+            () -> {RevMotorsSHOOT();}
+        );
+    }
+
+    public Command KickMotorONCommand(){
+        return runOnce(
+            () -> {KickMotorON();}
+        );
+    }
 }
