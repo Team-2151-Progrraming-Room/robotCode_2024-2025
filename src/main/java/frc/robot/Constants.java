@@ -109,7 +109,9 @@ public final class Constants {
 
     public static final int AlgaeRevVelocity = 10;
     public static final int AlgaeRev2Velocity = 10;
-    public static final int AlgaeKickVelocity = 10;
+    
+    public static final double algaeIntake = 0.5;
+    
 
   }
 

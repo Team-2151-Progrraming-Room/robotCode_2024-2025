@@ -1,0 +1,50 @@
+package frc.robot.subsystems;
+
+import edu.wpi.first.math.MathUtil;
+
+import static edu.wpi.first.units.Units.*;
+
+import java.io.ObjectInputFilter.Config;
+
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.util.sendable.SendableBuilder;
+
+import com.ctre.phoenix6.StatusCode;
+import com.ctre.phoenix6.configs.FeedbackConfigs;
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.MotionMagicVoltage;
+import com.ctre.phoenix6.hardware.TalonFX;
+
+import frc.robot.Robot;
+import frc.robot.Constants.AlgaeShooterConstants;
+
+public class AlgaeSubsystemCTRE extends SubsystemBase (){
+
+    TalonFXS m_Rev = new TalonFXS(AlgaeShooterConstants.RevMotor);
+    TalonFXS m_Rev2  = new TalonFXS(AlgaeShooterConstants.Rev2Motor);
+    TalonFXS m_Kick = new TalonFXS(AlgaeShooterConstants.KickMotor);
+
+    var TalonFXConfigs = new TalonFXConfiguration();
+    
+    var Slot0Configs;
+    //fill with code later
+    public AlgaeSubsystemCTRE (){
+        Slot0Configs = TalonFXConfigs.Slot0;
+        Slot0configs.kP = AlgaeShooterConstants.AlgaePIDControllerP;
+        Slot0configs.kI = AlgaeShooterConstants.AlgaePIDControllerI;
+        Slot0configs.kD = AlgaeShooterConstants.AlgaePIDControllerD;
+
+        m_Rev.getConfigurator().apply(TalonFXConfigs);
+        m_Rev.setInverted(true);
+        m_Rev2.getConfigurator().apply(TalonFXConfigs);
+
+        
+    }
+
+    public void algaeIntake(){
+        m_Rev.set(AlgaeShooterConstants.algaeIntake);
+    }
+}
