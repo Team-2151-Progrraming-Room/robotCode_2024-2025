@@ -8,17 +8,24 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.util.sendable.SendableBuilder;
 
+//our imports
+import frc.robot.Robot;
+import frc.robot.Constants.ArmConstants;
+import frc.robot.util.*;
 
+//CTRE Imports
+import com.ctre.phoenix6.StatusCode;
+import com.ctre.phoenix6.StatusSignal;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.NeutralOut;
+import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
+import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
 
-// SparkMax imports - these come from REV Robotics
-
-import com.revrobotics.*;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.spark.config.SparkMaxConfig;
-import com.revrobotics.spark.*;
-import com.revrobotics.spark.SparkBase.*;
+import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.wpilibj.TimedRobot;
 
 // our robot constants
 
@@ -26,87 +33,39 @@ import frc.robot.Robot;
 import frc.robot.Constants.CoralConstants;
 import frc.robot.util.*;
 
-
-
 import java.util.function.DoubleSupplier;
-
-
 
 public class CoralSubsystem extends SubsystemBase{
 
-    private final SparkMax m_Motor1 = new SparkMax(CoralConstants.kCoralMotor1, MotorType.kBrushless);
-    private final SparkMax m_Motor2 = new SparkMax(CoralConstants.kCoralMotor2, MotorType.kBrushless);
-    private SparkClosedLoopController m_Coral1PIDController;
-    private SparkClosedLoopController m_Coral2PIDController;
-   
-    //motor pid
+    private final TalonFX m_CoralMotor = new TalonFX(CoralConstants.kCoralMotor);
+
     public CoralSubsystem(){
-        m_CoralMotor1.stopMotor();
-        m_CoralMotor2.stopMotor();
-
-        config
-        .inverted(true)
-        .idleMode(IdleMode.kBrake)
-        .smartCurrentLimit(CoralConstants.kCoralMotorCurrentLimit);
-        config.encoder
-        .positionConversionFactor(CoralConstants.kCoralEncoderConversionFactor);
-        config.closedLoop
-        .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-        .pid(CoralConstants.kCoralPIDControllerP, CoralConstants.kCoralPIDControllerI, CoralConstants.kCoralPIDControllerD)
-        .outputRange(CoralConstants.kCoralPIDControllerOutputMin, CoralConstants.kCoralPIDControllerOutputMax);
-
-        m_coralMotor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-        m_Coral1PIDController = m_CoralMotor1.getClosedLoopController();
-        m_Coral2PIDController = m_CoralMotor2.getClosedLoopController();
-
+        m_CoralMotor.stopMotor();
     }
 
-    //encoders
-    public double getVelocity1(){
-        double position = m_CoralMotor1.getEncoder().getVelocity1();
-        return position;
-    }
-    public double getVelocity2(){
-        double position = m_CoralMotor2.getEncoder().getVelocity2();
-        return position;
+    //methods to turn motor on/off
+    public void coralMotorOn(){
+        m_CoralMotor.set(CoralConstants.kCoralMotorSpeed)
     }
 
-    //intake 
-    public void intakeCoralMotor(){
-        m_Coral1PIDController.setReference(CoralConstants.kCoralMotor1IntakeSpeed, ControlType.kPosition);
-        m_Coral2PIDController.setReference(CoralConstants.kCoralMotor2IntakeSpeed, ControlType.kPosition);
+    public void coralMotorOff(){
+        m_coralRpmTarget = 0.0;
+
+        m_CoralMotor.set(m_coralRpmTarget)
     }
 
-    //output 
-    public void outputCoralMotor(){
-        m_Coral1PIDController.setReference(CoralConstants.kCoralMotor1OutputSpeed, ControlType.kPosition);
-        m_Coral2PIDController.setReference(CoralConstants.kCoralMotor2OutputSpeed, ControlType.kPosition);
-    }
-   
-    /*Command methods for intake and output */
-    public Command intakeCoralCommand(){
+    //Commands
+    public Command coralMotorOnCommand(){
         return runOnce(
-            () -> {intakeCoral();}
-        );
+            () -> {
+                coralMotorOn();
+            });
     }
 
-     public Command outputCoralCommand(){
+    public Command coralMotorOffCommand(){
         return runOnce(
-            () -> {outputCoral();}
-        );
+            () -> {
+                coralMotorOff();
+            });
     }
-    
-    //returns velocity value of motors
-    public Command getVelocity1Command(){
-        return runOnce(
-            () -> {getVelocity1();}
-        );
-    }
-    public Command getVelocity2Command(){
-        return runOnce(
-            () -> {getVelocity2();}
-        );
-    }
-
-    
 }
