@@ -82,11 +82,11 @@ public final class Constants {
     
   }
   
-  public static final class AlgaeShooterConstants {
+  public static final class AlgaeConstants {
 
-    public static final int AlgaeRevMotor = 31;
-    public static final int AlgaeRev2Motor =32;
-    public static final int AlgaeKickMotor = 33;
+    public static final int AlgaeRevMotorID = 31;
+    public static final int AlgaeRev2MotorID = 32;
+    public static final int AlgaeKickMotorID = 33;
     
 
     public static final double AlgaeSpeedForward = 0.25;
@@ -96,23 +96,25 @@ public final class Constants {
     public static final int AlgaeRev2MotorCurrentLimit = 40;
     public static final int AlgaeKickMotorCurrentLimit = 40;
 
+    //PID Constants
+    public static final int AlgaePIDControllerS = 0;
+    public static final int AlgaePIDControllerV = 0;
     public static final int AlgaePIDControllerP = 0;
     public static final int AlgaePIDControllerI = 0;
     public static final int AlgaePIDControllerD = 0;
-    public static final int AlgaePIDControllerFF = 0;
-    public static final int AlgaePIDControllerIZone = 0;
-    public static final int AlgaePIDControllerOutputRange = 5;
-    public static final int AlgaePIDControllerOutputMin = 5;
-    public static final int AlgaePIDControllerOutputMax = 5;
-
+    //
     public static final int AlgaeEncoderConversionFactor = 1000;
 
     public static final int AlgaeRevVelocity = 10;
     public static final int AlgaeRev2Velocity = 10;
     
+    public static final double AlgaeKickMotorON = .75;
+
     public static final double algaeIntake = 0.5;
     
+    public static final int AlgaeVoltage = 0;
 
+    public static final int AlgaeFeed = 0;
   }
 
 

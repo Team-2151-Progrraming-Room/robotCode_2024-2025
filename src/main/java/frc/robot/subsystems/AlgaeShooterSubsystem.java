@@ -25,9 +25,9 @@ import com.revrobotics.spark.SparkBase.*;
 // Our robot constants
 
 import frc.robot.Robot;
-import frc.robot.Constants.AlgaeShooterConstants;
+import frc.robot.Constants.AlgaeConstants;
 //import frc.robot.util - keep if needed for future use;
-import frc.robot.Constants.ArmConstants;
+
 
 public class AlgaeShooterSubsystem extends SubsystemBase {
     
@@ -37,9 +37,9 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
     private SparkClosedLoopController m_AlgaeKickPIDController;
 
         SparkMaxConfig config = new SparkMaxConfig();
-    private final SparkMax m_AlgaeRevMotor = new SparkMax(AlgaeShooterConstants.AlgaeRevMotor, MotorType.kBrushless);
-    private final SparkMax m_AlgaeRev2Motor = new SparkMax(AlgaeShooterConstants.AlgaeRev2Motor, MotorType.kBrushless);
-    private final SparkMax m_AlgaeKickMotor = new SparkMax(AlgaeShooterConstants.AlgaeKickMotor, MotorType.kBrushless);
+    private final SparkMax m_AlgaeRevMotor = new SparkMax(AlgaeConstants.AlgaeRevMotorID, MotorType.kBrushless);
+    private final SparkMax m_AlgaeRev2Motor = new SparkMax(AlgaeConstants.AlgaeRev2MotorID, MotorType.kBrushless);
+    private final SparkMax m_AlgaeKickMotor = new SparkMax(AlgaeConstants.AlgaeKickMotorID, MotorType.kBrushless);
     
     
     
@@ -69,7 +69,7 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
             .positionConversionFactor(ArmConstants.kArmEncoderConversionFactor);
             config.closedLoop
             .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-            .pid(ArmConstants.kArmPIDControllerP, ArmConstants.kArmPIDControllerI, ArmConstants.kArmPIDControllerD)
+            .pid(ArmConstants.kAPIDControllerP, ArmConstants.kArmPIDControllerI, ArmConstants.kArmPIDControllerD)
             .outputRange(ArmConstants.kArmPIDControllerOutputMin, ArmConstants.kArmPIDControllerOutputMax);
 
             //For Rev2 Motor
@@ -91,12 +91,12 @@ public class AlgaeShooterSubsystem extends SubsystemBase {
 
 
     public void AlgaeKickMotorOn(){
-            m_AlgaeKickPIDController.setReference(AlgaeShooterConstants.AlgaeKickVelocity, SparkMax.ControlType.kVelocity);
+            m_AlgaeKickPIDController.setReference(AlgaeConstants.AlgaeKickMotorON, SparkMax.ControlType.kVelocity);
     }
 
     public void AlgaeRevMotorsOn(){
-            m_AlgaeRevPIDController.setReference(AlgaeShooterConstants.AlgaeRevVelocity, SparkMax.ControlType.kVelocity); 
-            m_AlgaeRev2PIDController.setReference(AlgaeShooterConstants.AlgaeRev2Velocity, SparkMax.ControlType.kVelocity);
+            m_AlgaeRevPIDController.setReference(AlgaeConstants.AlgaeRevVelocity, SparkMax.ControlType.kVelocity); 
+            m_AlgaeRev2PIDController.setReference(AlgaeConstants.AlgaeRev2Velocity, SparkMax.ControlType.kVelocity);
     }
 
     public void  AlgaeMotorsOff(){

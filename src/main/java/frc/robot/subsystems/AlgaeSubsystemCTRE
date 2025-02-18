@@ -23,28 +23,66 @@ import frc.robot.Constants.AlgaeShooterConstants;
 
 public class AlgaeSubsystemCTRE extends SubsystemBase (){
 
-    TalonFXS m_Rev = new TalonFXS(AlgaeShooterConstants.RevMotor);
-    TalonFXS m_Rev2  = new TalonFXS(AlgaeShooterConstants.Rev2Motor);
-    TalonFXS m_Kick = new TalonFXS(AlgaeShooterConstants.KickMotor);
+    TalonFXS m_Rev = new TalonFXS(AlgaeConstants.AlgaeRevMotorID);
+    TalonFXS m_Rev2  = new TalonFXS(AlgaeConstants.AlgaeRev2MotorID);
+    TalonFXS m_Kick = new TalonFXS(AlgaeConstants.AlgaeKickMotorID);
 
     var TalonFXConfigs = new TalonFXConfiguration();
     
     var Slot0Configs;
-    //fill with code later
     public AlgaeSubsystemCTRE (){
-        Slot0Configs = TalonFXConfigs.Slot0;
-        Slot0configs.kP = AlgaeShooterConstants.AlgaePIDControllerP;
-        Slot0configs.kI = AlgaeShooterConstants.AlgaePIDControllerI;
-        Slot0configs.kD = AlgaeShooterConstants.AlgaePIDControllerD;
+        slot0Configs = TalonFXConfigs.Slot0;
+        slot0Configs.kS = AlgaeConstants.AlgaePIDControllerS
+        slot0Configs.kV = AlgaeConstants.AlgaePIDControllerV
+        slot0Configs.kP = AlgaeConstants.AlgaePIDControllerP;
+        slot0Configs.kI = AlgaeConstants.AlgaePIDControllerI;
+        slot0Configs.kD = AlgaeConstants.AlgaePIDControllerD;
 
         m_Rev.getConfigurator().apply(TalonFXConfigs);
         m_Rev.setInverted(true);
         m_Rev2.getConfigurator().apply(TalonFXConfigs);
 
+        m_request = new VelocityVoltage(AlgaeConstants.AlgaeVoltage).withSlot(0);
+    }
+
+    final VelocityVoltage m_request.
+
+    public void algaeIntake(){
+
+        m_Rev.set(AlgaeConstants.algaeIntake);
+        m_Rev2.set(AlgaeConstants.algaeIntake);
+        
         
     }
 
-    public void algaeIntake(){
-        m_Rev.set(AlgaeShooterConstants.algaeIntake);
+    // For the Motors to turn OFF!
+    public void RevMotorsOFF(){
+        m_Rev.stopMotor();
+        m_Rev2.stopMotor();
     }
+
+    public void KickMotorOFF(){
+        m_Kick.stopMotor();
+    }
+
+    public void allMotorsOFF(){
+        m_Rev.stopMotor();
+        m_Rev2.stopMotor();
+        m_Kick.stopMotor();
+    }
+
+    // For the Motors to turn ON!
+    public void RevMotorsSHOOT(){
+        m_Rev.setControl(m_request.withVelocity(AlgaeConstants.AlgaeRevVelocity).WithFeedForward(AlgaeConstants.AlgaeFeed));
+        m_Rev2.setControl(m_request.withVelocity(AlgaeConstants.AlgaeRev2Velocity)).WithFeedForward(AlgaeConstants.AlgaeFeed);
+    }
+    
+    public void KickMotorON(){
+        m_Kick.set(AlgaeConstants.AlgaeKickMotorON);
+    }
+// Get velocites, put in later.
+
+    //Commands
+    public Command 
+
 }
