@@ -64,7 +64,7 @@ public class ArmSubsystemCTRE extends SubsystemBase{
   }
 
   public void armManualUp(){
-m_arm.set(ArmConstants.kArmSpeedUp);
+    m_arm.set(ArmConstants.kArmSpeedUp);
   }
 
   public void armManualDown(){
