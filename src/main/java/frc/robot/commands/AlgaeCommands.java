@@ -12,3 +12,30 @@
 // GNU General Public License for more details.
 
 package frc.robot.commands;
+
+
+
+
+//Shooting Command (maybe not be needed)
+
+
+
+
+
+
+// Dumping Command
+
+
+
+
+
+
+
+// Ground Intake Command
+
+
+
+
+
+
+// Processor Deposit Command
