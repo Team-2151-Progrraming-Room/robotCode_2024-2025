@@ -1,3 +1,4 @@
+// Imports
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.MathUtil;
@@ -21,8 +22,8 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import frc.robot.Robot;
 import frc.robot.Constants.AlgaeShooterConstants;
 
+// Main Class
 public class AlgaeSubsystemCTRE extends SubsystemBase (){
-
     TalonFXS m_Rev = new TalonFXS(AlgaeConstants.AlgaeRevMotorID);
     TalonFXS m_Rev2  = new TalonFXS(AlgaeConstants.AlgaeRev2MotorID);
     TalonFXS m_Kick = new TalonFXS(AlgaeConstants.AlgaeKickMotorID);
@@ -30,6 +31,8 @@ public class AlgaeSubsystemCTRE extends SubsystemBase (){
     var TalonFXConfigs = new TalonFXConfiguration();
     
     var Slot0Configs;
+    
+    // Sub Class
     public AlgaeSubsystemCTRE (){
         slot0Configs = TalonFXConfigs.Slot0;
         slot0Configs.kS = AlgaeConstants.AlgaePIDControllerS
@@ -48,10 +51,8 @@ public class AlgaeSubsystemCTRE extends SubsystemBase (){
     final VelocityVoltage m_request.
 
     public void algaeIntake(){
-
         m_Rev.set(AlgaeConstants.algaeIntake);
         m_Rev2.set(AlgaeConstants.algaeIntake);
-        
         
     }
 
