@@ -82,24 +82,9 @@ public final class Constants {
 
   }
   public static class CoralConstants {
-    public static final int kCoralMotor1 = 35;
-    public static final int kCoralMotor2 = 36;
+    public static final int kCoralMotor = 35;
    
-    public static final double kCoralMotor1IntakeSpeed = 0.5;
-    public static final double kCoralMotor2IntakeSpeed = -0.5;
-    public static final double kCoralMotor1OutputSpeed = -0.5;
-    public static final double kCoralMotor2OutputSpeed = 0.5; 
-
-    public static final int kCoralPIDControllerP = 0;
-    public static final int kCoralPIDControllerI = 0;
-    public static final int kCoralPIDControllerD = 0;
-    public static final int kCoralPIDControllerFF = 0;
-    public static final int kCoralPIDControllerIZone = 0;
-    public static final int kCoralPIDControllerOutputRange = 5;
-    public static final int kCoralPIDControllerOutputMin = 5;
-    public static final int kCoralPIDControllerOutputMax = 5;
-
-    public static final int kCoralEncoderConversionFactor = 1000;
+    public static final double kCoralMotorSpeed = 0.5;
   }
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
