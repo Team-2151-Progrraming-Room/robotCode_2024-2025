@@ -56,7 +56,8 @@ public final class Constants {
   }
   public static final class ArmConstants{
     public static final int kArmMotor = 20;
-    public static final int kLockMotor = 21;
+    public static final int kArmMotor2 = 21;
+    public static final int kLockMotor = 22;
     public static final int kArmCANcoder = 23;
 
     public static final double kArmSpeedUp = 0.5;
@@ -85,6 +86,10 @@ public final class Constants {
     public static final int kArmPositionClimb = 110;
     
 
+  }
+
+  public static class CanbusName{
+    public static final String armCANBus = "name";
   }
   
   public static class OperatorConstants {

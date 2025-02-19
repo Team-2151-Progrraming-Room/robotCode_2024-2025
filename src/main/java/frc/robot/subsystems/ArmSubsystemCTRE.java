@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public class ArmSubsystemCTRE extends SubsystemBase{
     private final TalonFX m_arm = new TalonFX(ArmConstants.kArmMotor);
+    private final TalonFX m_armFollower = new TalonFX(ArmConstants.kArmMotor2);
     private final CANcoder cancoder;
 
   /* Be able to switch which control request to use based on a button press */
@@ -49,6 +50,18 @@ public class ArmSubsystemCTRE extends SubsystemBase{
   public void setPosition(double armPosition){
     double position = armPosition * ArmConstants.kArmCANCoderConversionFactor;
     m_arm.setPosition(position);
+  }
+
+  public void stopArmMotor(){
+    m_arm.stopMotor();
+  }
+
+  public void armManualUp(){
+m_arm.set(ArmConstants.kArmSpeedUp);
+  }
+
+  public void armManualDown(){
+    m_arm.set(ArmConstants.kArmSpeedDown);
   }
 
   public StatusSignal<Angle> getPosition(){
