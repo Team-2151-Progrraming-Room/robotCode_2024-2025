@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
@@ -52,12 +53,38 @@ public class RobotContainer {
   //buttonBoard
   private final Joystick buttonBoard = new Joystick(1);
 
+  public final JoystickButton button1;
+  public final JoystickButton button2;
+  public final JoystickButton button3;
+  public final JoystickButton button4;
+  public final JoystickButton button5;
+  public final JoystickButton button6;
+  public final JoystickButton button7;
+  public final JoystickButton button8;
+  public final JoystickButton button9;
+  public final JoystickButton button10;
+  public final JoystickButton button11;
+  public final JoystickButton button12;
+
 
   // Dashboard inputs
   private final LoggedDashboardChooser<Command> autoChooser;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    button1 = new JoystickButton(buttonBoard, 1);
+    button2 = new JoystickButton(buttonBoard, 2);
+    button3 = new JoystickButton(buttonBoard, 3);
+    button4 = new JoystickButton(buttonBoard,4);
+    button5 = new JoystickButton(buttonBoard,5);
+    button6 = new JoystickButton(buttonBoard, 6);
+    button7 = new JoystickButton(buttonBoard, 7);
+    button8 = new JoystickButton(buttonBoard, 8);
+    button9 = new JoystickButton(buttonBoard, 9);
+    button10 = new JoystickButton(buttonBoard, 10);
+    button11 = new JoystickButton(buttonBoard, 11);
+    button12 = new JoystickButton(buttonBoard, 12);
+
     switch (Constants.currentMode) {
       case REAL:
         // Real robot, instantiate hardware IO implementations
@@ -158,8 +185,13 @@ public class RobotContainer {
                     drive)
                 .ignoringDisable(true));
 
-    //button board (still need to figure out how to call exact button)
-    buttonBoard.1().whileTrue(Commands.run(ArmSubsystemCTRE.armManualUpCommand()));
+    /*
+     * Binds each button on the button board with it's command
+     * Some call it directly from the subsystem class (manual arm commands),
+     * While others call the command from the file
+     */
+    button1.whileTrue(arm.armManualUpCommand());
+    button2.whileTrue(arm.armManualDownCommand());
   }
 
   /**
