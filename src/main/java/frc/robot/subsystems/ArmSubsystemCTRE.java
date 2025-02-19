@@ -1,14 +1,17 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.Command;
 
 //our imports
 import frc.robot.Robot;
 import frc.robot.Constants.ArmConstants;
+import frc.robot.Constants.CanbusName;
 import frc.robot.util.*;
 
 //CTRE Imports
 import com.ctre.phoenix6.StatusCode;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.NeutralOut;
@@ -20,7 +23,6 @@ import com.ctre.phoenix6.configs.CANcoderConfiguration;
 
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
 
 
 public class ArmSubsystemCTRE extends SubsystemBase{
@@ -36,15 +38,20 @@ public class ArmSubsystemCTRE extends SubsystemBase{
 
   private final StatusSignal<Angle> armAbsolutePosition;
 
+  private final CANcoderConfiguration canConfig;
+
   public ArmSubsystemCTRE(){
     m_arm.stopMotor();
-    cancoder = new CANcoder(ArmConstants.kArmCANcoder);
+    cancoder = new CANcoder(ArmConstants.kArmCANcoder, CanbusName.armCANBus);
     m_positionVoltage = new PositionVoltage(0).withSlot(0);
     m_positionTorque = new PositionTorqueCurrentFOC(0).withSlot(1);
 
     armAbsolutePosition = cancoder.getPosition();
 
+    m_armFollower.setControl(new Follower(m_arm.getDeviceID(), true));
+
     m_arm.setPosition(0);
+    canConfig = new CANcoderConfiguration();
   }
 
   public void setPosition(double armPosition){
@@ -67,5 +74,19 @@ m_arm.set(ArmConstants.kArmSpeedUp);
   public StatusSignal<Angle> getPosition(){
 
     return armAbsolutePosition;
+  }
+
+  //commands
+
+  public Command armManualUpCommand(){
+    return runOnce(
+      () -> {armManualUp();}
+    );
+  }
+
+  public Command armManualDownCommand(){
+    return runOnce(
+      () -> {armManualDown();}
+    );
   }
 }

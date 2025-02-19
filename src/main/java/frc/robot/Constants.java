@@ -89,7 +89,7 @@ public final class Constants {
   }
 
   public static class CanbusName{
-    public static final String armCANBus = "name";
+    public static final String armCANBus = "rio";
   }
   
   public static class OperatorConstants {
