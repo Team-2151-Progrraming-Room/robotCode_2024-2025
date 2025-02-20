@@ -76,7 +76,7 @@ public final class Constants {
     public static final int kArmPIDControllerOutputMin = 5;
     public static final int kArmPIDControllerOutputMax = 5;
 
-    public static final int kArmEncoderConversionFactor = 45.5111111;
+    public static final double kArmCANCoderConversionFactor = 45.5111111;
 
     //arm positions in degrees 
     public static final int kArmPositionGroundAlgae = 110;
@@ -123,7 +123,9 @@ public final class Constants {
     public static final int AlgaeFeed = 0;
   }
 
-
+  public static class CanbusName{
+    public static final String armCANBus = "rio";
+  }
 
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;

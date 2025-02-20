@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
 import frc.robot.subsystems.AlgaeSubsystemCTRE;
-import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.ArmSubsystemCTRE;
 
 import frc.robot.Constants.*;
 
