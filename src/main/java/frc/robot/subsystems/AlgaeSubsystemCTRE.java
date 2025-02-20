@@ -35,8 +35,8 @@ public class AlgaeSubsystemCTRE extends SubsystemBase{
     // Sub Class
     public AlgaeSubsystemCTRE (){
         slot0Configs = TalonFXConfigs.Slot0;
-        slot0Configs.kS = AlgaeConstants.AlgaePIDControllerS
-        slot0Configs.kV = AlgaeConstants.AlgaePIDControllerV
+        slot0Configs.kS = AlgaeConstants.AlgaePIDControllerS;
+        slot0Configs.kV = AlgaeConstants.AlgaePIDControllerV;
         slot0Configs.kP = AlgaeConstants.AlgaePIDControllerP;
         slot0Configs.kI = AlgaeConstants.AlgaePIDControllerI;
         slot0Configs.kD = AlgaeConstants.AlgaePIDControllerD;
@@ -48,7 +48,7 @@ public class AlgaeSubsystemCTRE extends SubsystemBase{
         m_request = new VelocityVoltage(AlgaeConstants.AlgaeVoltage).withSlot(0);
     }
 
-    final VelocityVoltage m_request.
+    final VelocityVoltage m_request;
 
     public void algaeIntake(){
         m_Rev.set(AlgaeConstants.algaeIntake);
