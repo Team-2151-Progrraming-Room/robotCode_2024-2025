@@ -57,7 +57,9 @@ public final class Constants {
 
   public static final class ArmConstants{
     public static final int kArmMotor = 20;
-    public static final int kLockMotor = 21;
+    public static final int kArmMotor2 = 21;
+    public static final int kLockMotor = 22;
+    public static final int kArmCANcoder = 23;
 
     public static final double kArmSpeedUp = 0.5;
     public static final double kArmSpeedDown = -0.5;
@@ -74,11 +76,15 @@ public final class Constants {
     public static final int kArmPIDControllerOutputMin = 5;
     public static final int kArmPIDControllerOutputMax = 5;
 
-    public static final int kArmEncoderConversionFactor = 1000;
+    public static final int kArmEncoderConversionFactor = 45.5111111;
 
-    public static final int kArmPositionLow = 15;
-    public static final int kArmPositionMid = 45;
-    public static final int kArmPositionHigh = 110;
+    //arm positions in degrees 
+    public static final int kArmPositionGroundAlgae = 110;
+    public static final int kArmPositionLowAlgae = 15;
+    public static final int kArmPositionProcessor = 110;
+    public static final int kArmPositionHighAlgae = 45;
+    public static final int kPositionShoot = 110;
+    public static final int kArmPositionClimb = 110;
     
   }
   
