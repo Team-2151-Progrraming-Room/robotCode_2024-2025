@@ -15,9 +15,10 @@ import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.configs.TalonFXSConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFXS;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 
 import frc.robot.Robot;
 import frc.robot.Constants.AlgaeConstants;
@@ -28,22 +29,22 @@ public class AlgaeSubsystemCTRE extends SubsystemBase{
     TalonFXS m_Rev2  = new TalonFXS(AlgaeConstants.AlgaeRev2MotorID);
     TalonFXS m_Kick = new TalonFXS(AlgaeConstants.AlgaeKickMotorID);
 
-    var TalonFXConfigs = new TalonFXConfiguration();
+    TalonFXSConfiguration configs = new TalonFXSConfiguration();
     
-    var Slot0Configs;
+    Slot0Configs slot0;
     
     // Sub Class
     public AlgaeSubsystemCTRE (){
-        slot0Configs = TalonFXConfigs.Slot0;
-        slot0Configs.kS = AlgaeConstants.AlgaePIDControllerS;
-        slot0Configs.kV = AlgaeConstants.AlgaePIDControllerV;
-        slot0Configs.kP = AlgaeConstants.AlgaePIDControllerP;
-        slot0Configs.kI = AlgaeConstants.AlgaePIDControllerI;
-        slot0Configs.kD = AlgaeConstants.AlgaePIDControllerD;
+        slot0 = configs.Slot0;
+        slot0.kS = AlgaeConstants.AlgaePIDControllerS;
+        slot0.kV = AlgaeConstants.AlgaePIDControllerV;
+        slot0.kP = AlgaeConstants.AlgaePIDControllerP;
+        slot0.kI = AlgaeConstants.AlgaePIDControllerI;
+        slot0.kD = AlgaeConstants.AlgaePIDControllerD;
 
-        m_Rev.getConfigurator().apply(TalonFXConfigs);
+        m_Rev.getConfigurator().apply(configs);
         m_Rev.setInverted(true);
-        m_Rev2.getConfigurator().apply(TalonFXConfigs);
+        m_Rev2.getConfigurator().apply(configs);
 
         m_request = new VelocityVoltage(AlgaeConstants.AlgaeVoltage).withSlot(0);
     }
@@ -74,8 +75,8 @@ public class AlgaeSubsystemCTRE extends SubsystemBase{
 
     // For the Motors to turn ON!
     public void RevMotorsSHOOT(){
-        m_Rev.setControl(m_request.withVelocity(AlgaeConstants.AlgaeRevVelocity).WithFeedForward(AlgaeConstants.AlgaeFeed));
-        m_Rev2.setControl(m_request.withVelocity(AlgaeConstants.AlgaeRev2Velocity)).WithFeedForward(AlgaeConstants.AlgaeFeed);
+        m_Rev.setControl(m_request.withVelocity(AlgaeConstants.AlgaeRevVelocity).withFeedForward(AlgaeConstants.AlgaeFeed));
+        m_Rev2.setControl(m_request.withVelocity(AlgaeConstants.AlgaeRev2Velocity).withFeedForward(AlgaeConstants.AlgaeFeed));
     }
     
     public void KickMotorON(){
