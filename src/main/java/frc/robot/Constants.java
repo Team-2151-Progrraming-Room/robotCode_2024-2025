@@ -74,7 +74,7 @@ public final class Constants {
     public static final int kArmPIDControllerOutputMin = 5;
     public static final int kArmPIDControllerOutputMax = 5;
 
-    public static final int kArmEncoderConversionFactor = 1000;
+    public static final int kArmCANCoderConversionFactor = 1000;
 
     public static final int kArmPositionLow = 15;
     public static final int kArmPositionMid = 45;

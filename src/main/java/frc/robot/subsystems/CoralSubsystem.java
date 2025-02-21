@@ -20,7 +20,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.PositionVoltage;
-import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.hardware.TalonFXS;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 
@@ -29,15 +29,15 @@ import edu.wpi.first.wpilibj.TimedRobot;
 
 // our robot constants
 
-import frc.robot.Robot;
+//import frc.robot.Robot;
 import frc.robot.Constants.CoralConstants;
-import frc.robot.util.*;
+//import frc.robot.util.*;
 
 import java.util.function.DoubleSupplier;
 
 public class CoralSubsystem extends SubsystemBase{
 
-    private final TalonFX m_CoralMotor = new TalonFX(CoralConstants.kCoralMotor);
+    private final TalonFXS m_CoralMotor = new TalonFXS(CoralConstants.kCoralMotor);
 
     public CoralSubsystem(){
         m_CoralMotor.stopMotor();
@@ -45,13 +45,13 @@ public class CoralSubsystem extends SubsystemBase{
 
     //methods to turn motor on/off
     public void coralMotorOn(){
-        m_CoralMotor.set(CoralConstants.kCoralMotorSpeed)
+        m_CoralMotor.set(CoralConstants.kCoralMotorSpeed);
     }
 
     public void coralMotorOff(){
-        m_coralRpmTarget = 0.0;
+        double m_coralRpmTarget = 0.0;
 
-        m_CoralMotor.set(m_coralRpmTarget)
+        m_CoralMotor.set(m_coralRpmTarget);
     }
 
     //Commands
