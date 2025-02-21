@@ -121,6 +121,8 @@ public final class Constants {
     public static final int AlgaeVoltage = 0;
 
     public static final int AlgaeFeed = 0;
+
+    public static final double ShooterWaitTime = 0.25;
   }
 
   public static class CanbusName{

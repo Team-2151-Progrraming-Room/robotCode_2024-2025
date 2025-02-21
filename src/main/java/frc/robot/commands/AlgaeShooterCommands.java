@@ -17,20 +17,52 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
 import frc.robot.subsystems.AlgaeSubsystemCTRE;
-import frc.robot.subsystems.ArmSubsystemCTRE;
+
 
 import frc.robot.Constants.*;
 
 import static edu.wpi.first.units.Units.*;
 
 
+public class AlgaeShooterCommands extends Command{
+
+AlgaeSubsystemCTRE m_algaeSubsystem;
 
 //Shooting Command (maybe not be needed)
 
+public AlgaeShooterCommands(AlgaeSubsystemCTRE AlgaeSystem){
+
+    m_algaeSubsystem = AlgaeSystem;
+    
+    addRequirements(AlgaeSystem);
+}
+
+
+public Command getShootCommand(){
+
+    return Commands.sequence(
+        
+            m_algaeSubsystem.RevMotorsSHOOTCommand(),
+            Commands.waitSeconds(AlgaeConstants.ShooterWaitTime),
+           
+            m_algaeSubsystem.KickMotorONCommand(),
+            Commands.waitSeconds(AlgaeConstants.ShooterWaitTime),
+            m_algaeSubsystem.allMotorsOFFCommand()
+    );
+    
+
+        
+
+        
 
 
 
 
+        
+    
+
+
+}
 
 // Dumping Command
 
@@ -48,3 +80,11 @@ import static edu.wpi.first.units.Units.*;
 
 
 // Processor Deposit Command
+
+
+
+
+
+
+
+}

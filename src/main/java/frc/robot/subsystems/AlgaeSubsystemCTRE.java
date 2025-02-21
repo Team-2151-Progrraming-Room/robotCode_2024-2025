@@ -84,6 +84,11 @@ public class AlgaeSubsystemCTRE extends SubsystemBase{
     }
 // Get velocites, put in later.
 
+
+
+
+
+
     //Commands
     
     public Command RevMotorOFFCommand(){
