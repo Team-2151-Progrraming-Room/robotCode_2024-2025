@@ -15,6 +15,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import java.util.function.BooleanSupplier;
 
 import frc.robot.subsystems.AlgaeSubsystemCTRE;
 
@@ -28,11 +29,14 @@ public class AlgaeShooterCommands extends Command{
 
 AlgaeSubsystemCTRE m_algaeSubsystem;
 
+BooleanSupplier m_atSpeedCheck;
+
 //Shooting Command (maybe not be needed)
 
-public AlgaeShooterCommands(AlgaeSubsystemCTRE AlgaeSystem){
+public AlgaeShooterCommands(AlgaeSubsystemCTRE AlgaeSystem, BooleanSupplier speedCheck){
 
     m_algaeSubsystem = AlgaeSystem;
+    m_atSpeedCheck = speedCheck;
     
     addRequirements(AlgaeSystem);
 }
@@ -43,10 +47,10 @@ public Command getShootCommand(){
     return Commands.sequence(
         
             m_algaeSubsystem.RevMotorsSHOOTCommand(),
-            Commands.waitSeconds(AlgaeConstants.ShooterWaitTime),
+            Commands.waitSeconds(AlgaeConstants.kShooterWaitTime).until(m_atSpeedCheck),
            
             m_algaeSubsystem.KickMotorONCommand(),
-            Commands.waitSeconds(AlgaeConstants.ShooterWaitTime),
+            Commands.waitSeconds(AlgaeConstants.kShooterWaitTime),
             m_algaeSubsystem.allMotorsOFFCommand()
     );
     
