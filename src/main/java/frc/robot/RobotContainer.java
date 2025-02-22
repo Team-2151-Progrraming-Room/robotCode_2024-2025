@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -28,6 +29,7 @@ import frc.robot.generated.TunerConstants;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 import frc.robot.subsystems.CoralSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -78,6 +80,9 @@ public class RobotContainer{
     button11 = new JoystickButton(buttonBoard, 11);
     button12 = new JoystickButton(buttonBoard, 12);
 
+    //Xbox Buttons
+    //Trigger yButton = controller.y();
+
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
 
     // Set up SysId routines
@@ -97,6 +102,7 @@ public class RobotContainer{
     // Default command, normal field-relative drive
     button3.whileTrue(Coral.coralMotorOnCommand());
    // button4.onTrue();
+    controller.y().whileTrue(Coral.coralMotorOnCommand());
   }
 
   /**
