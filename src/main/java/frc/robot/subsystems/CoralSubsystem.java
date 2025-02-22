@@ -10,7 +10,6 @@ import edu.wpi.first.util.sendable.SendableBuilder;
 
 //our imports
 import frc.robot.Robot;
-import frc.robot.Constants.ArmConstants;
 import frc.robot.util.*;
 
 //CTRE Imports

@@ -54,33 +54,7 @@ public final class Constants {
     public static final int BLCanCoder = 16;
 
   }
-  public static final class ArmConstants{
-    public static final int kArmMotor = 20;
-    public static final int kLockMotor = 21;
-    public static final int kArmCANcoder = 23;
 
-    public static final double kArmSpeedUp = 0.5;
-    public static final double kArmSpeedDown = -0.5;
-
-    public static final int kArmMotorCurrentLimit = 40;
-    public static final int kLockMotorCurrentLimit = 40;
-
-    public static final int kArmPIDControllerP = 0;
-    public static final int kArmPIDControllerI = 0;
-    public static final int kArmPIDControllerD = 0;
-    public static final int kArmPIDControllerFF = 0;
-    public static final int kArmPIDControllerIZone = 0;
-    public static final int kArmPIDControllerOutputRange = 5;
-    public static final int kArmPIDControllerOutputMin = 5;
-    public static final int kArmPIDControllerOutputMax = 5;
-
-    public static final int kArmCANCoderConversionFactor = 1000;
-
-    public static final int kArmPositionLow = 15;
-    public static final int kArmPositionMid = 45;
-    public static final int kArmPositionHigh = 110;
-
-  }
   public static class CoralConstants {
     public static final int kCoralMotor = 35;
    
