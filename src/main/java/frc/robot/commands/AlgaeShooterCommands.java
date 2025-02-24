@@ -47,10 +47,10 @@ public Command getShootCommand(){
     return Commands.sequence(
         
             m_algaeSubsystem.RevMotorsSHOOTCommand(),
-            Commands.waitSeconds(AlgaeConstants.ShortShooterWaitTime),
+            Commands.waitSeconds(AlgaeConstants.kShortShooterWaitTime),
            
             m_algaeSubsystem.KickMotorONCommand(),
-            Commands.waitSeconds(AlgaeConstants.LongShooterWaitTime),
+            Commands.waitSeconds(AlgaeConstants.kLongShooterWaitTime),
             m_algaeSubsystem.allMotorsOFFCommand()
     );
     
@@ -65,7 +65,7 @@ public Command getDumpCommand(){
             m_algaeSubsystem.RevMotorsSHOOTCommand(),
             m_algaeSubsystem.KickMotorONCommand(),
 
-            Commands.waitSeconds(AlgaeConstants.LongShooterWaitTime),
+            Commands.waitSeconds(AlgaeConstants.kLongShooterWaitTime),
 
             m_algaeSubsystem.allMotorsOFFCommand()
     );
@@ -79,10 +79,10 @@ public Command getIntakeCommand(){
             m_algaeSubsystem.KickMotorOFFCommand()
 
             ,m_algaeSubsystem.RevMotorsSHOOTCommand(),
-            Commands.waitSeconds(AlgaeConstants.ShortShooterWaitTime),
+            Commands.waitSeconds(AlgaeConstants.kShortShooterWaitTime),
            
             m_algaeSubsystem.KickMotorONCommand(),
-            Commands.waitSeconds(AlgaeConstants.LongShooterWaitTime),
+            Commands.waitSeconds(AlgaeConstants.kLongShooterWaitTime),
             m_algaeSubsystem.allMotorsOFFCommand()
     );
     
@@ -98,10 +98,10 @@ public Command getDepositCommand(){
 
     return Commands.sequence(
         m_algaeSubsystem.RevMotorsSHOOTCommand(),
-        Commands.waitSeconds(AlgaeConstants.ShortShooterWaitTime),
+        Commands.waitSeconds(AlgaeConstants.kShortShooterWaitTime),
 
         m_algaeSubsystem.KickMotorONCommand(),
-        Commands.waitSeconds(AlgaeConstants.LongShooterWaitTime),
+        Commands.waitSeconds(AlgaeConstants.kLongShooterWaitTime),
         m_algaeSubsystem.allMotorsOFFCommand()
 
 

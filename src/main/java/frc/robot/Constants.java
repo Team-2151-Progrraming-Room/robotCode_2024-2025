@@ -120,8 +120,8 @@ public final class Constants {
     
     public static final int kAlgaeVoltage = 0;
 
-    public static final double ShortShooterWaitTime = 0.25;
-    public static final double LongShooterWaitTime = 0.5;
+    public static final double kShortShooterWaitTime = 0.25;
+    public static final double kLongShooterWaitTime = 0.5;
   }
 
   public static class CanbusName{
