@@ -43,48 +43,72 @@ public Command getShootCommand(){
     return Commands.sequence(
         
             m_algaeSubsystem.RevMotorsSHOOTCommand(),
-            Commands.waitSeconds(AlgaeConstants.ShooterWaitTime),
+            Commands.waitSeconds(AlgaeConstants.ShortShooterWaitTime),
            
             m_algaeSubsystem.KickMotorONCommand(),
-            Commands.waitSeconds(AlgaeConstants.ShooterWaitTime),
+            Commands.waitSeconds(AlgaeConstants.LongShooterWaitTime),
             m_algaeSubsystem.allMotorsOFFCommand()
     );
     
-
-        
-
-        
-
-
-
-
-        
-    
-
-
 }
 
 // Dumping Command
 
+public Command getDumpCommand(){
 
+    return Commands.sequence(
+        
+            m_algaeSubsystem.RevMotorsSHOOTCommand(),
+            m_algaeSubsystem.KickMotorONCommand(),
 
+            Commands.waitSeconds(AlgaeConstants.LongShooterWaitTime),
 
-
-
-
+            m_algaeSubsystem.allMotorsOFFCommand()
+    );
+    
+}
 // Ground Intake Command
 
+public Command getIntakeCommand(){
+
+    return Commands.sequence(
+            m_algaeSubsystem.KickMotorOFFCommand()
+
+            ,m_algaeSubsystem.RevMotorsSHOOTCommand(),
+            Commands.waitSeconds(AlgaeConstants.ShortShooterWaitTime),
+           
+            m_algaeSubsystem.KickMotorONCommand(),
+            Commands.waitSeconds(AlgaeConstants.LongShooterWaitTime),
+            m_algaeSubsystem.allMotorsOFFCommand()
+    );
+    
 
 
 
 
 
+}
 // Processor Deposit Command
 
+public Command getDepositCommand(){
+
+    return Commands.sequence(
+        m_algaeSubsystem.RevMotorsSHOOTCommand(),
+        Commands.waitSeconds(AlgaeConstants.ShortShooterWaitTime),
+
+        m_algaeSubsystem.KickMotorONCommand(),
+        Commands.waitSeconds(AlgaeConstants.LongShooterWaitTime),
+        m_algaeSubsystem.allMotorsOFFCommand()
 
 
 
 
 
+
+
+
+    );
+
+}
 
 }
