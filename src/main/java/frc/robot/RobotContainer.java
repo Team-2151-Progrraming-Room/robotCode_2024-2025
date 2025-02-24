@@ -25,8 +25,15 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.generated.TunerConstants;
+import java.util.function.BooleanSupplier;
+
+//our subsystems
 import frc.robot.subsystems.ArmSubsystemCTRE;
 import frc.robot.subsystems.AlgaeSubsystemCTRE;
+
+//out commands
+import frc.robot.commands.AlgaeShooterCommands;
+
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -37,8 +44,14 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
  */
 public class RobotContainer {
   // Subsystems
-  private final ArmSubsystemCTRE arm;
-  private final AlgaeSubsystemCTRE algae;
+  private final ArmSubsystemCTRE arm = new ArmSubsystemCTRE();;
+  private final AlgaeSubsystemCTRE algae = new AlgaeSubsystemCTRE();;
+
+  //boolean supplier
+  BooleanSupplier m_dynamicAtShootSpeed = () -> algae.atShooterSpeed();;
+
+  //commands
+  private final Command m_algaeShootCommand = new AlgaeShooterCommands(algae, m_dynamicAtShootSpeed).getShootCommand();
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
   private final Joystick buttonBoard = new Joystick(1);
@@ -60,25 +73,9 @@ public class RobotContainer {
     button4 = new JoystickButton(buttonBoard, 4);
     button5 = new JoystickButton(buttonBoard, 5);
 
-    switch (Constants.currentMode) {
-      case REAL:
-        // Real robot, instantiate hardware IO implementations
-        
-
-      case SIM:
-        // Sim robot, instantiate physics sim IO implementations
-       
-      default:
-        // Replayed robot, disable IO implementations
-    }
 
     // Set up auto routines
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
-
-    //arm subsystem
-    arm = new ArmSubsystemCTRE();
-
-    // Set up SysId routines
   
     // Configure the button bindings
     configureButtonBindings();
@@ -90,16 +87,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
-    // Default command, normal field-relative drive
-   
-    // Lock to 0° when A button is held
-   
-    // Switch to X pattern when X button is pressed
-    
-
-    // Reset gyro to 0° when B button is pressed
-  
+  private void configureButtonBindings() {
+    button2.onTrue(m_algaeShootCommand);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

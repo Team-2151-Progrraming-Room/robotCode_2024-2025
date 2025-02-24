@@ -90,37 +90,35 @@ public final class Constants {
   
   public static final class AlgaeConstants {
 
-    public static final int AlgaeRevMotorID = 31;
-    public static final int AlgaeRev2MotorID = 32;
-    public static final int AlgaeKickMotorID = 33;
-    
+    public static final int kAlgaeRevMotorID = 31;
+    public static final int kAlgaeRev2MotorID = 32;
+    public static final int kAlgaeKickMotorID = 33;
 
-    public static final double AlgaeSpeedForward = 0.25;
-    public static final double AlgaeSpeedBackward = -0.25;
-
-    public static final int AlgaeRevMotorCurrentLimit = 40;
-    public static final int AlgaeRev2MotorCurrentLimit = 40;
-    public static final int AlgaeKickMotorCurrentLimit = 40;
+    public static final int kAlgaeRevMotorCurrentLimit = 40;
+    public static final int kAlgaeRev2MotorCurrentLimit = 40;
+    public static final int kAlgaeKickMotorCurrentLimit = 40;
 
     //PID Constants
-    public static final int AlgaePIDControllerS = 0;
-    public static final int AlgaePIDControllerV = 0;
-    public static final int AlgaePIDControllerP = 0;
-    public static final int AlgaePIDControllerI = 0;
-    public static final int AlgaePIDControllerD = 0;
-    //
-    public static final int AlgaeEncoderConversionFactor = 1000;
-
-    public static final int AlgaeRevVelocity = 10;
-    public static final int AlgaeRev2Velocity = 10;
+    public static final int kAlgaePIDControllerS = 0;
+    public static final int kAlgaePIDControllerV = 0;
+    public static final int kAlgaePIDControllerP = 0;
+    public static final int kAlgaePIDControllerI = 0;
+    public static final int kAlgaePIDControllerD = 0;
+    public static final int kAlgaeFeed = 0;//force to overcome gravity
     
-    public static final double AlgaeKickMotorON = .75;
 
-    public static final double algaeIntake = 0.5;
+    public static final int kAlgaeEncoderConversionFactor = 1000;//used to convert rpm to velocity
+
+    public static final int kAlgaeRevVelocity = 10;
+    public static final int kAlgaeRev2Velocity = 10;
+
+    public static final int kAlgaeSpeedTolerance = 2;
     
-    public static final int AlgaeVoltage = 0;
-
-    public static final int AlgaeFeed = 0;
+    //actions that don't require pid control
+    public static final double kAlgaeKickMotorON = .75;
+    public static final double kAlgaeIntake = 0.5;
+    
+    public static final int kAlgaeVoltage = 0;
 
     public static final double ShortShooterWaitTime = 0.25;
     public static final double LongShooterWaitTime = 0.5;

@@ -25,9 +25,9 @@ import frc.robot.Constants.AlgaeConstants;
 
 // Main Class
 public class AlgaeSubsystemCTRE extends SubsystemBase{
-    TalonFXS m_Rev = new TalonFXS(AlgaeConstants.AlgaeRevMotorID);
-    TalonFXS m_Rev2  = new TalonFXS(AlgaeConstants.AlgaeRev2MotorID);
-    TalonFXS m_Kick = new TalonFXS(AlgaeConstants.AlgaeKickMotorID);
+    TalonFXS m_Rev = new TalonFXS(AlgaeConstants.kAlgaeRevMotorID);
+    TalonFXS m_Rev2  = new TalonFXS(AlgaeConstants.kAlgaeRev2MotorID);
+    TalonFXS m_Kick = new TalonFXS(AlgaeConstants.kAlgaeKickMotorID);
 
     TalonFXSConfiguration configs = new TalonFXSConfiguration();
     
@@ -36,24 +36,25 @@ public class AlgaeSubsystemCTRE extends SubsystemBase{
     // Sub Class
     public AlgaeSubsystemCTRE (){
         slot0 = configs.Slot0;
-        slot0.kS = AlgaeConstants.AlgaePIDControllerS;
-        slot0.kV = AlgaeConstants.AlgaePIDControllerV;
-        slot0.kP = AlgaeConstants.AlgaePIDControllerP;
-        slot0.kI = AlgaeConstants.AlgaePIDControllerI;
-        slot0.kD = AlgaeConstants.AlgaePIDControllerD;
+        slot0.kS = AlgaeConstants.kAlgaePIDControllerS;
+        slot0.kV = AlgaeConstants.kAlgaePIDControllerV;
+        slot0.kP = AlgaeConstants.kAlgaePIDControllerP;
+        slot0.kI = AlgaeConstants.kAlgaePIDControllerI;
+        slot0.kD = AlgaeConstants.kAlgaePIDControllerD;
+
 
         m_Rev.getConfigurator().apply(configs);
         m_Rev.setInverted(true);
         m_Rev2.getConfigurator().apply(configs);
 
-        m_request = new VelocityVoltage(AlgaeConstants.AlgaeVoltage).withSlot(0);
+        m_request = new VelocityVoltage(AlgaeConstants.kAlgaeVoltage).withSlot(0);
     }
 
     final VelocityVoltage m_request;
 
     public void algaeIntake(){
-        m_Rev.set(AlgaeConstants.algaeIntake);
-        m_Rev2.set(AlgaeConstants.algaeIntake);
+        m_Rev.set(AlgaeConstants.kAlgaeIntake);
+        m_Rev2.set(AlgaeConstants.kAlgaeIntake);
         
     }
 
@@ -75,19 +76,33 @@ public class AlgaeSubsystemCTRE extends SubsystemBase{
 
     // For the Motors to turn ON!
     public void RevMotorsSHOOT(){
-        m_Rev.setControl(m_request.withVelocity(AlgaeConstants.AlgaeRevVelocity).withFeedForward(AlgaeConstants.AlgaeFeed));
-        m_Rev2.setControl(m_request.withVelocity(AlgaeConstants.AlgaeRev2Velocity).withFeedForward(AlgaeConstants.AlgaeFeed));
+        m_Rev.setControl(m_request.withVelocity(AlgaeConstants.kAlgaeRevVelocity).withFeedForward(AlgaeConstants.kAlgaeFeed));
+        m_Rev2.setControl(m_request.withVelocity(AlgaeConstants.kAlgaeRev2Velocity).withFeedForward(AlgaeConstants.kAlgaeFeed));
     }
     
     public void KickMotorON(){
-        m_Kick.set(AlgaeConstants.AlgaeKickMotorON);
+        m_Kick.set(AlgaeConstants.kAlgaeKickMotorON);
     }
-// Get velocites, put in later.
 
+    public double getRevVelocity(){
+        double velocity = m_Rev.getVelocity().getValueAsDouble();
+        System.out.println(velocity);
+        return velocity;
+    }
 
+    public double getRev2Velocity(){
+        double velocity = m_Rev2.getVelocity().getValueAsDouble();
+        System.out.println(velocity);
+        return velocity;
+    }
 
+    public boolean atShooterSpeed() {
 
-
+        if (MathUtil.isNear(AlgaeConstants.kAlgaeRevVelocity, getRevVelocity(), AlgaeConstants.kAlgaeSpeedTolerance) && MathUtil.isNear(AlgaeConstants.kAlgaeRev2Velocity, getRev2Velocity(), AlgaeConstants.kAlgaeSpeedTolerance)) {
+          return true;
+        }
+        return false;
+      }
 
     //Commands
     
