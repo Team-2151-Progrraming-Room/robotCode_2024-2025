@@ -59,6 +59,8 @@ public class RobotContainer{
   public final JoystickButton button11;
   public final JoystickButton button12;
 
+
+
   // Dashboard inputs
   private final LoggedDashboardChooser<Command> autoChooser;
   
@@ -102,7 +104,7 @@ public class RobotContainer{
     // Default command, normal field-relative drive
     button3.whileTrue(Coral.coralMotorOnCommand());
    // button4.onTrue();
-    controller.y().whileTrue(Coral.coralMotorOnCommand());
+    controller.y().onTrue(Coral.coralMotorOnCommand().withTimeout(2).andThen(Coral.coralMotorOffCommand()));
   }
 
   /**
